@@ -10,6 +10,16 @@ import matplotlib.pyplot as plt
 import os
 from PIL import Image
 
+def gauss_classifier(X):
+        N = X.shape[1]
+        # get mean and covariances of data
+        Mean = np.mean(X,axis=1,keepdims=True)
+        Cov = (X-Mean).dot((X-Mean).T)
+        Cov /= (N-1)
+        # return both of them as a dict 
+        g_dict = {'mean':Mean, 'cov':Cov}
+        return g_dict
+
 # COV = (1/K)(X - X_mean).(X - X_mean)^T
 def PCA(X,n): 
 	X_2 = X - np.mean(X,axis=1,keepdims=True)    							# removed the mean
